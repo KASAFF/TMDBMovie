@@ -39,19 +39,26 @@ class MainViewController: UIViewController {
         return tableView
     }()
 
-    lazy var multimediaLoader  = MultimediaLoader(delegate: self)
+    lazy var multimediaLoader = MultimediaLoader(delegate: self)
 
     var collectionView: UICollectionView!
 
-    var multimedias = [Multimedia]()
+    var moviesArray = [MultimediaViewModel]()
+
+    var tvShowsArray = [MultimediaViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        multimediaLoader.fetchMultimedia(for: .movie) { movie in
-            self.multimediaLoader.fetchImage(from: (movie.results?[0].posterPath)!) { image in
-                
-            }
+//        multimediaLoader.getMediaData(for: .movie) { model in
+//            model.forEach { vmodel in
+//                print(vmodel)
+//            }
+//        }
+
+        multimediaLoader.getAllTypesOfMediaData { arr
+            in
+            print(arr)
         }
 
 

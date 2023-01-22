@@ -22,6 +22,7 @@
 		ABB8DE8E297C94DE006EA231 /* MultimediaLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE8D297C94DE006EA231 /* MultimediaLoader.swift */; };
 		ABB8DE90297C9A90006EA231 /* MultimediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */; };
 		ABB8DE92297C9DCE006EA231 /* MultimediaViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE91297C9DCE006EA231 /* MultimediaViewModelBuilder.swift */; };
+		ABB99A3C297DDAF6002490E6 /* Dateformatter + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		ABB8DE8D297C94DE006EA231 /* MultimediaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaLoader.swift; sourceTree = "<group>"; };
 		ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewModel.swift; sourceTree = "<group>"; };
 		ABB8DE91297C9DCE006EA231 /* MultimediaViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewModelBuilder.swift; sourceTree = "<group>"; };
+		ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dateformatter + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				AB66A27E297C0ECB00EBB009 /* AppDelegate.swift */,
 				ABB8DE8C297C85C6006EA231 /* Service */,
 				AB66A294297C1D4A00EBB009 /* UIColor+Extension.swift */,
+				ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */,
 				AB66A280297C0ECB00EBB009 /* SceneDelegate.swift */,
 				AB66A282297C0ECB00EBB009 /* MainViewController.swift */,
 				AB66A292297C12C200EBB009 /* MainTabBarController.swift */,
@@ -206,6 +209,7 @@
 			files = (
 				ABB8DE8E297C94DE006EA231 /* MultimediaLoader.swift in Sources */,
 				AB66A283297C0ECB00EBB009 /* MainViewController.swift in Sources */,
+				ABB99A3C297DDAF6002490E6 /* Dateformatter + Extension.swift in Sources */,
 				AB66A27F297C0ECB00EBB009 /* AppDelegate.swift in Sources */,
 				ABB8DE8B297C85AD006EA231 /* NetworkManager.swift in Sources */,
 				AB66A293297C12C200EBB009 /* MainTabBarController.swift in Sources */,

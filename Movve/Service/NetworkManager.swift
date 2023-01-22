@@ -12,6 +12,7 @@ final class NetworkManager {
     
     func fetchData(with url: URL, completion: @escaping (Swift.Result<Data, Error>) -> Void) {
         let request = URLRequest(url: url)
+        print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
