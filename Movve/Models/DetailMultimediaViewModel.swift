@@ -11,7 +11,7 @@ struct DetailMultimediaViewModel: Codable {
     let genres: String
     let id: Int
     let overview: String
-    let releaseYear: Int
+    let releaseYear: String
     let title: String
     let posterPath: String
     let voteAverage: Double

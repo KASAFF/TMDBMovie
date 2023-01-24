@@ -21,16 +21,8 @@ struct Movie: Codable {
     let genreIds: [Int]
     let id: Int
     let overview: String
-    let  releaseDate, title: String?
-    let posterPath: String
+    let releaseDate, title: String?
+    let posterPath: String?
     let voteAverage: Double
     let firstAirDate, name: String?
 }
-
-//struct TVShow: Codable {
-//    let genreIds: [Int]
-//    let id: Int
-//    let overview: String
-//    let posterPath, firstAirDate, name: String
-//    let voteAverage: Double
-//}

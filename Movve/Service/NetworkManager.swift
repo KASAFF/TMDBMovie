@@ -20,7 +20,7 @@ final class NetworkManager {
 
             if let response = response as? HTTPURLResponse,
                 response.statusCode < 200 || response.statusCode >= 300 {
-                completion(.failure(String("Invalid response please try again later") as! Error) )
+               // completion(.failure(error.unsafelyUnwrapped) )
                 return
             }
 

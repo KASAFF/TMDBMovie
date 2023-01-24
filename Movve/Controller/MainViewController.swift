@@ -195,12 +195,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         let multimediaType = collectionView.tag == 0 ? moviesArray : tvShowsArray
         let multimedia = multimediaType[indexPath.row]
 
-        print(multimedia)
-
-
-        let detailVC = DetailMediaViewController()
-
-        multimediaLoader.fetchDetailData(multimedia: multimedia)
+        let detailVC = DetailMediaViewController(multimedia: multimedia)
 
 
         navigationController?.pushViewController(detailVC, animated: true)

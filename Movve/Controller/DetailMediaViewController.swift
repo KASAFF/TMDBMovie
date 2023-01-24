@@ -73,12 +73,29 @@ class DetailMediaViewController: UIViewController {
         return sv
     }()
 
-    var multimedia: DetailMultimediaModel!
+    let multimediaLoader = MultimediaLoader()
+
+    let multimedia: MultimediaViewModel!
+
+
+    init(multimedia: MultimediaViewModel) {
+        self.multimedia = multimedia
+        super.init(nibName: nil, bundle: nil)
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
+    var detailMultimedia: DetailMultimediaModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
         view.backgroundColor = .mainColor
+        getDetailData(multimedia: multimedia)
 
         setupLayout()
     }
@@ -88,9 +105,21 @@ class DetailMediaViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    private func configureViewWithData() {
-        titleLabel.text = multimedia.title
-        
+    private func getDetailData(multimedia: MultimediaViewModel) {
+        multimediaLoader.fetchDetailData(multimedia: multimedia) { detailMM in
+            let viewModel = self.multimediaLoader.convertDetailMMtoViewModel(detailMultimedia: detailMM, type: multimedia.type)
+            self.configureWith(detailViewModel: viewModel)
+        }
+    }
+
+    private func configureWith(detailViewModel: DetailMultimediaViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.titleLabel.text = detailViewModel.title
+            self.infoLabel.text = detailViewModel.releaseYear + detailViewModel.genres + String(detailViewModel.runtime ?? 0)
+            self.overviewTextView.text = detailViewModel.overview
+        }
+
     }
 
     let gradient = CAGradientLayer()

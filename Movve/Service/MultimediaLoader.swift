@@ -19,6 +19,8 @@ enum MultimediaTypeURL: String, CaseIterable {
 
 final class MultimediaLoader {
 
+   static let shared = MultimediaLoader()
+
     weak var delegate: UIViewController?
 
     private let decoder: JSONDecoder = {
@@ -106,6 +108,7 @@ final class MultimediaLoader {
         guard let url = URL(string: baseURL + "discover/" + type.rawValue + "?api_key=" + apiKey) else {
             return
         }
+        print(url)
 
         networkManager.fetchData(with: url) { result in
             switch result {
@@ -122,7 +125,7 @@ final class MultimediaLoader {
         }
     }
 
-    func fetchDetailData(multimedia: MultimediaViewModel) {
+    func fetchDetailData(multimedia: MultimediaViewModel, completion: @escaping (DetailMultimediaModel) -> Void) {
         guard let url = URL(string: baseURL + "\(multimedia.type.rawValue)/\(multimedia.id)?api_key=\(apiKey)") else { return }
         print(url)
 
@@ -130,8 +133,8 @@ final class MultimediaLoader {
             switch result {
             case .success(let data):
                 do {
-                    let multimedia = try self.decoder.decode(DetailMultimediaModel.self, from: data)
-                    print(multimedia)
+                    let detailMultimedia = try self.decoder.decode(DetailMultimediaModel.self, from: data)
+                    completion(detailMultimedia)
                 } catch {
                     print(error)
                 }
@@ -141,6 +144,45 @@ final class MultimediaLoader {
         }
     }
 
+    func convertDetailMMtoViewModel(detailMultimedia: DetailMultimediaModel, type: MultimediaTypeURL) -> DetailMultimediaViewModel {
+
+        let title: String
+        let id: Int
+        let releaseYear: String
+        let genres: String
+        let posterPath: String
+        let voteAverage: Double
+        let time: Int?
+        let overview: String
+
+        switch type {
+        case .movie:
+            title = detailMultimedia.title ?? "No name"
+            time = detailMultimedia.runtime
+        case .tvShow:
+            title = detailMultimedia.name ?? "No name"
+            time = detailMultimedia.episodeRunTime?.first
+        }
+
+        id = detailMultimedia.id
+        releaseYear = detailMultimedia.releaseDate?.convertToYear() ?? ""
+        genres = detailMultimedia.genres.first?.name ?? ""
+        posterPath = detailMultimedia.posterPath
+        voteAverage = detailMultimedia.voteAverage
+        overview = detailMultimedia.overview
+
+
+
+        return DetailMultimediaViewModel(genres: genres,
+                                         id: id,
+                                         overview: overview,
+                                         releaseYear: releaseYear,
+                                         title: title,
+                                         posterPath: posterPath,
+                                         voteAverage: voteAverage,
+                                         runtime: time)
+    }
+
     func getMediaData(for type: MultimediaTypeURL, completion: @escaping (([MultimediaViewModel]) -> Void)) {
         var multimediaViewModel = [MultimediaViewModel]()
 
@@ -148,7 +190,7 @@ final class MultimediaLoader {
             guard let result = movie.results else { return }
             result.forEach { movieResult in
 
-                let posterURL = self.imageBaseUrl + movieResult.posterPath
+                let posterURL = self.imageBaseUrl + (movieResult.posterPath ?? "") 
                 let formattedDate: String
                 let genre: String
                 let title: String
