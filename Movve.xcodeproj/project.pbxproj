@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB5EAAD7297EDE5100F39D31 /* DetailMultimediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */; };
+		AB5EAAD9297EDFE400F39D31 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */; };
+		AB5EAADC297F56F500F39D31 /* DetailMultimediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */; };
 		AB66A27F297C0ECB00EBB009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A27E297C0ECB00EBB009 /* AppDelegate.swift */; };
 		AB66A281297C0ECB00EBB009 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A280297C0ECB00EBB009 /* SceneDelegate.swift */; };
 		AB66A283297C0ECB00EBB009 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A282297C0ECB00EBB009 /* MainViewController.swift */; };
@@ -26,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMultimediaModel.swift; sourceTree = "<group>"; };
+		AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
+		AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMultimediaViewModel.swift; sourceTree = "<group>"; };
 		AB66A27B297C0ECB00EBB009 /* Movve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB66A27E297C0ECB00EBB009 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB66A280297C0ECB00EBB009 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB5EAADA297EDFE900F39D31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */,
+				AB66A282297C0ECB00EBB009 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		AB66A272297C0ECB00EBB009 = {
 			isa = PBXGroup;
 			children = (
@@ -83,7 +98,7 @@
 				AB66A294297C1D4A00EBB009 /* UIColor+Extension.swift */,
 				ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */,
 				AB66A280297C0ECB00EBB009 /* SceneDelegate.swift */,
-				AB66A282297C0ECB00EBB009 /* MainViewController.swift */,
+				AB5EAADA297EDFE900F39D31 /* Controller */,
 				AB66A292297C12C200EBB009 /* MainTabBarController.swift */,
 				AB66A287297C0ECD00EBB009 /* Assets.xcassets */,
 				AB66A289297C0ECD00EBB009 /* LaunchScreen.storyboard */,
@@ -122,6 +137,8 @@
 			children = (
 				AB66A29E297C343A00EBB009 /* Multimedia.swift */,
 				ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */,
+				AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */,
+				AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,6 +235,9 @@
 				AB66A281297C0ECB00EBB009 /* SceneDelegate.swift in Sources */,
 				ABB8DE90297C9A90006EA231 /* MultimediaViewModel.swift in Sources */,
 				AB66A2A1297C5A1A00EBB009 /* UIHelper.swift in Sources */,
+				AB5EAAD7297EDE5100F39D31 /* DetailMultimediaModel.swift in Sources */,
+				AB5EAADC297F56F500F39D31 /* DetailMultimediaViewModel.swift in Sources */,
+				AB5EAAD9297EDFE400F39D31 /* DetailMediaViewController.swift in Sources */,
 				AB66A29C297C338C00EBB009 /* SectionTableViewCell.swift in Sources */,
 				AB66A29F297C343A00EBB009 /* Multimedia.swift in Sources */,
 				AB66A295297C1D4A00EBB009 /* UIColor+Extension.swift in Sources */,

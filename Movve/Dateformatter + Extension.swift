@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
 
-    func convertDateString() -> String {
+    func convertDateString() -> String? {
 
       //  let inputDateString = "2022-12-07"
         let inputDateFormatter = DateFormatter()
@@ -20,7 +20,9 @@ extension String {
         let outputDateFormatter = DateFormatter()
         outputDateFormatter.dateFormat = "MMM dd, yyyy"
 
-        let outputDateString = outputDateFormatter.string(from: inputDate!)
+        guard let safeInputDate = inputDate else { return nil }
+
+        let outputDateString = outputDateFormatter.string(from: safeInputDate)
 
         return outputDateString
 

@@ -12,7 +12,6 @@ final class NetworkManager {
     
     func fetchData(with url: URL, completion: @escaping (Swift.Result<Data, Error>) -> Void) {
         let request = URLRequest(url: url)
-        print(request)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -52,3 +51,5 @@ final class NetworkManager {
 // https://api.themoviedb.org/3/discover/tv?api_key=594bcc6cf3865f6c3e8326fd2d8f3f17
 
 // https://image.tmdb.org/t/p/w500/ imagepath
+
+// https://api.themoviedb.org/3/movie/315162?api_key=594bcc6cf3865f6c3e8326fd2d8f3f17 detail VC

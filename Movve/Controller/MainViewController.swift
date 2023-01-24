@@ -43,6 +43,16 @@ class MainViewController: UIViewController {
 
     var collectionView: UICollectionView!
 
+    var allDataArray = [[MultimediaViewModel]]() {
+        didSet {
+            tableView.reloadData()
+            if allDataArray.count == MultimediaTypeURL.allCases.count {
+                moviesArray = allDataArray[0]
+                tvShowsArray = allDataArray[1]
+            }
+        }
+    }
+
     var moviesArray = [MultimediaViewModel]()
 
     var tvShowsArray = [MultimediaViewModel]()
@@ -50,18 +60,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        multimediaLoader.getMediaData(for: .movie) { model in
-//            model.forEach { vmodel in
-//                print(vmodel)
-//            }
-//        }
+        multimediaLoader.getAllTypesOfMediaData { allDataArray in
 
-        multimediaLoader.getAllTypesOfMediaData { arr
-            in
-            print(arr)
+            self.allDataArray = allDataArray
         }
-
-
 
         view.backgroundColor = .mainColor
         view.addSubview(tableView)
@@ -126,6 +128,7 @@ class MainViewController: UIViewController {
     }
 }
 
+var currentData = [MultimediaViewModel]()
 //MARK: - TableView
 
 extension MainViewController: UITableViewDataSource {
@@ -134,11 +137,18 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return allDataArray.count
     }
 
+
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SectionsTableViewCell.reuseID, for: indexPath) as! SectionsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SectionsTableViewCell.reuseID) as! SectionsTableViewCell
+        cell.collectionView.dataSource = self
+        cell.collectionView.delegate = self
+
+        cell.collectionView.tag = indexPath.section
+
         return cell
     }
 
@@ -155,6 +165,46 @@ extension MainViewController: UITableViewDelegate {
 
 //MARK: - Collection View
 
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView.tag {
+        case 0: return moviesArray.count
+        case 1: return tvShowsArray.count
+        default: break
+        }
+        return 1
+    }
 
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.reuseID, for: indexPath) as! PopularCell
+        let multimediaType = collectionView.tag == 0 ? moviesArray : tvShowsArray
+        let multimedia = multimediaType[indexPath.row]
+
+        cell.configureData(multimedia: multimedia)
+        
+
+        print(collectionView.tag)
+
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let multimediaType = collectionView.tag == 0 ? moviesArray : tvShowsArray
+        let multimedia = multimediaType[indexPath.row]
+
+        print(multimedia)
+
+
+        let detailVC = DetailMediaViewController()
+
+        multimediaLoader.fetchDetailData(multimedia: multimedia)
+
+
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
 
 

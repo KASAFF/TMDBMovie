@@ -13,6 +13,14 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         generateTabBar()
         setTabBarApperance()
+
+        if #available(iOS 15.0, *) {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithTransparentBackground()
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
     }
 
     private func generateTabBar() {

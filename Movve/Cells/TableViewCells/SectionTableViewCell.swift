@@ -7,16 +7,23 @@
 
 import UIKit
 
+protocol CollectionViewCellDelegate: AnyObject {
+    func configure(with data: MultimediaViewModel)
+}
+
 class SectionsTableViewCell: UITableViewCell {
+
+    weak var delegate: MainViewController?
+
+    var data = [MultimediaViewModel]()
 
     static let reuseID = "tableId"
 
-    private var collectionView: UICollectionView!
+
+    var collectionView: UICollectionView!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
         configureCollectionView()
 
     }
@@ -37,35 +44,13 @@ class SectionsTableViewCell: UITableViewCell {
 
         collectionView.backgroundColor = .mainColor
 
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
+        self.collectionView.delegate = self.delegate
+        self.collectionView.dataSource = self.delegate
 
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInsetAdjustmentBehavior = .never
     }
-
-}
-
-extension SectionsTableViewCell: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.reuseID, for: indexPath) as! PopularCell
-        return cell
-    }
-
-
-}
-
-extension SectionsTableViewCell: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
 
 }
 

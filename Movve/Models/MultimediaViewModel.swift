@@ -8,12 +8,12 @@
 import UIKit
 
 struct MultimediaViewModel {
+    let id: Int
+    let type: MultimediaTypeURL
     let posterImageLink: String
     let titleName: String
     let releaseDate: String
     let genre: String?
     let description: String
     let rating: Double
-
-
 }
