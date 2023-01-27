@@ -26,6 +26,12 @@
 		ABB8DE90297C9A90006EA231 /* MultimediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */; };
 		ABB8DE92297C9DCE006EA231 /* MultimediaViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE91297C9DCE006EA231 /* MultimediaViewModelBuilder.swift */; };
 		ABB99A3C297DDAF6002490E6 /* Dateformatter + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */; };
+		ABF28CAB2984227B00791987 /* CastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF28CAA2984227B00791987 /* CastModel.swift */; };
+		ABF28CAF2984276B00791987 /* CastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF28CAE2984276B00791987 /* CastCell.swift */; };
+		ABF28CB229847A3A00791987 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF28CB129847A3A00791987 /* AlertPresenter.swift */; };
+		ABF28CB429847A5500791987 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF28CB329847A5500791987 /* AlertModel.swift */; };
+		ABF28CB629847CC900791987 /* MovveError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF28CB529847CC900791987 /* MovveError.swift */; };
+		ABF28CB82984802E00791987 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF28CB72984802E00791987 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +56,12 @@
 		ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewModel.swift; sourceTree = "<group>"; };
 		ABB8DE91297C9DCE006EA231 /* MultimediaViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewModelBuilder.swift; sourceTree = "<group>"; };
 		ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dateformatter + Extension.swift"; sourceTree = "<group>"; };
+		ABF28CAA2984227B00791987 /* CastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastModel.swift; sourceTree = "<group>"; };
+		ABF28CAE2984276B00791987 /* CastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCell.swift; sourceTree = "<group>"; };
+		ABF28CB129847A3A00791987 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		ABF28CB329847A5500791987 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		ABF28CB529847CC900791987 /* MovveError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovveError.swift; sourceTree = "<group>"; };
+		ABF28CB72984802E00791987 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +80,7 @@
 			children = (
 				AB66A294297C1D4A00EBB009 /* UIColor+Extension.swift */,
 				ABB99A3B297DDAF6002490E6 /* Dateformatter + Extension.swift */,
+				ABF28CB72984802E00791987 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -77,6 +90,7 @@
 			children = (
 				AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */,
 				AB66A282297C0ECB00EBB009 /* MainViewController.swift */,
+				ABF28CB129847A3A00791987 /* AlertPresenter.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -120,6 +134,7 @@
 			children = (
 				AB66A29A297C336B00EBB009 /* TableViewCells */,
 				AB66A299297C336200EBB009 /* CollectionViewCells */,
+				ABF28CB0298427B200791987 /* CastCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -147,6 +162,9 @@
 				ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */,
 				AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */,
 				AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */,
+				ABF28CAA2984227B00791987 /* CastModel.swift */,
+				ABF28CB329847A5500791987 /* AlertModel.swift */,
+				ABF28CB529847CC900791987 /* MovveError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,6 +178,14 @@
 				ABB8DE91297C9DCE006EA231 /* MultimediaViewModelBuilder.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		ABF28CB0298427B200791987 /* CastCell */ = {
+			isa = PBXGroup;
+			children = (
+				ABF28CAE2984276B00791987 /* CastCell.swift */,
+			);
+			path = CastCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,8 +262,10 @@
 				AB66A283297C0ECB00EBB009 /* MainViewController.swift in Sources */,
 				ABB99A3C297DDAF6002490E6 /* Dateformatter + Extension.swift in Sources */,
 				AB66A27F297C0ECB00EBB009 /* AppDelegate.swift in Sources */,
+				ABF28CB429847A5500791987 /* AlertModel.swift in Sources */,
 				ABB8DE8B297C85AD006EA231 /* NetworkManager.swift in Sources */,
 				AB66A293297C12C200EBB009 /* MainTabBarController.swift in Sources */,
+				ABF28CB82984802E00791987 /* UIViewController+Extension.swift in Sources */,
 				AB66A298297C281F00EBB009 /* PopularCell.swift in Sources */,
 				ABB8DE92297C9DCE006EA231 /* MultimediaViewModelBuilder.swift in Sources */,
 				AB66A281297C0ECB00EBB009 /* SceneDelegate.swift in Sources */,
@@ -246,6 +274,10 @@
 				AB5EAAD7297EDE5100F39D31 /* DetailMultimediaModel.swift in Sources */,
 				AB5EAADC297F56F500F39D31 /* DetailMultimediaViewModel.swift in Sources */,
 				AB5EAAD9297EDFE400F39D31 /* DetailMediaViewController.swift in Sources */,
+				ABF28CAF2984276B00791987 /* CastCell.swift in Sources */,
+				ABF28CB229847A3A00791987 /* AlertPresenter.swift in Sources */,
+				ABF28CAB2984227B00791987 /* CastModel.swift in Sources */,
+				ABF28CB629847CC900791987 /* MovveError.swift in Sources */,
 				AB66A29C297C338C00EBB009 /* SectionTableViewCell.swift in Sources */,
 				AB66A29F297C343A00EBB009 /* Multimedia.swift in Sources */,
 				AB66A295297C1D4A00EBB009 /* UIColor+Extension.swift in Sources */,

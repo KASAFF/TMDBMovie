@@ -9,10 +9,14 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
+    var alertPresenter: AlertPresenterProtocol!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         generateTabBar()
         setTabBarApperance()
+        alertPresenter = AlertPresenter(delegate: self)
+        
         if #available(iOS 15.0, *) {
                 let appearance = UITabBarAppearance()
                 appearance.configureWithOpaqueBackground()
@@ -24,6 +28,7 @@ class MainTabBarController: UITabBarController {
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithTransparentBackground()
+            navigationBarAppearance.backgroundColor = .mainColor
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().compactAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
@@ -73,5 +78,16 @@ class MainTabBarController: UITabBarController {
 
         tabBar.tintColor = .tabBarItemAccent
         tabBar.unselectedItemTintColor = .tabBarUnselectedColor
+    }
+
+    func showNetworkError(message: String) {
+
+        let errorAlert = AlertModel(title: "Ошибка",
+                                    message: message,
+                                    buttonText: "Попробовать еще раз") { [weak self] in
+           // guard let self = self else { return }
+        }
+
+        alertPresenter?.show(model: errorAlert)
     }
 }

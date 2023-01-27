@@ -39,6 +39,7 @@ class MainViewController: UIViewController {
         return tableView
     }()
 
+    private var alertPresenter: AlertPresenterProtocol!
     lazy var multimediaLoader = MultimediaLoader(delegate: self)
 
     var collectionView: UICollectionView!
@@ -57,13 +58,19 @@ class MainViewController: UIViewController {
 
     var tvShowsArray = [MultimediaViewModel]()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override var preferredStatusBarStyle : UIStatusBarStyle { .lightContent }
 
+    func fetchAllTypesOfMedia() {
         multimediaLoader.getAllTypesOfMediaData { allDataArray in
-
             self.allDataArray = allDataArray
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        alertPresenter = AlertPresenter(delegate: self)
+
+        fetchAllTypesOfMedia()
 
         view.backgroundColor = .mainColor
         view.addSubview(tableView)
@@ -81,6 +88,9 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        if let tabbar = tabBarController?.tabBar, tabbar.isHidden {
+            setTabBarHidden(false)
+        }
     }
 
     private func setLayout() {
@@ -105,7 +115,6 @@ class MainViewController: UIViewController {
             overallStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             overallStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             overallStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-
         ])
     }
 
@@ -139,8 +148,6 @@ extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return allDataArray.count
     }
-
-
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SectionsTableViewCell.reuseID) as! SectionsTableViewCell

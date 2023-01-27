@@ -44,3 +44,5 @@ final class NetworkManager {
 // https://image.tmdb.org/t/p/w500/ imagepath
 
 // https://api.themoviedb.org/3/movie/315162?api_key=594bcc6cf3865f6c3e8326fd2d8f3f17 detail VC
+
+// https://api.themoviedb.org/3/movie/536554/credits?api_key=594bcc6cf3865f6c3e8326fd2d8f3f17 cast link

@@ -39,7 +39,6 @@ final class MultimediaLoader {
     private let imageBaseUrl = "https://image.tmdb.org/t/p/w500"
 
 
-
     private let movieGenres: [Int: String] = [
         28: "Action",
         12: "Adventure",
@@ -89,6 +88,47 @@ final class MultimediaLoader {
         self.delegate = delegate
     }
 
+    //MARK: - Main ViewController Functions
+
+    func getMediaData(for type: MultimediaTypeURL, completion: @escaping (([MultimediaViewModel]) -> Void)) {
+        var multimediaViewModel = [MultimediaViewModel]()
+
+        fetchMultimedia(for: type) { movie in
+            guard let result = movie.results else { return }
+            result.forEach { movieResult in
+
+                let posterURL = self.imageBaseUrl + (movieResult.posterPath ?? "")
+                let formattedDate: String
+                let genre: String
+                let title: String
+
+                switch type {
+                case .movie:
+                    formattedDate = movieResult.releaseDate?.convertDateString() ?? "Unknown date"
+                    genre = self.movieGenres[movieResult.genreIds.first ?? 00] ?? "Unknown genre"
+                    title = movieResult.title ?? "Unknown movie"
+
+
+                case .tvShow:
+                    formattedDate = movieResult.firstAirDate?.convertDateString() ?? "Unknown date"
+                    genre = self.tvShowGenres[movieResult.genreIds.first ?? 00] ?? "Unknown genre"
+                    title = movieResult.name ?? "Unknown name"
+                }
+
+                multimediaViewModel.append(MultimediaViewModel(id: movieResult.id,
+                                                               type: type,
+                                                               posterImageLink: posterURL,
+                                                               titleName: title,
+                                                               releaseDate: formattedDate,
+                                                               genre: genre,
+                                                               description: movieResult.overview,
+                                                               rating: movieResult.voteAverage))
+            }
+            completion(multimediaViewModel)
+
+        }
+    }
+
     func getAllTypesOfMediaData(completion: @escaping ([[MultimediaViewModel]]) -> Void) {
         var arrayOfAllData = [[MultimediaViewModel]]()
         let group = DispatchGroup()
@@ -117,14 +157,18 @@ final class MultimediaLoader {
                     let multimedia = try self.decoder.decode(Multimedia.self, from: data)
                     completion(multimedia)
                 } catch {
-                    print(error)
+                    self.delegate?.presentDefaultError()
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure:
+                self.delegate?.presentAlert(message: MovveeError.codeError.rawValue, completion: {
+                    if let mainVC = self.delegate as? MainViewController {
+                        mainVC.fetchAllTypesOfMedia()
+                    }
+                })
             }
         }
     }
-
+//MARK: - DetailMedia Controller Functions
     func fetchDetailData(multimedia: MultimediaViewModel, completion: @escaping (DetailMultimediaModel) -> Void) {
         guard let url = URL(string: baseURL + "\(multimedia.type.rawValue)/\(multimedia.id)?api_key=\(apiKey)") else { return }
         print(url)
@@ -136,10 +180,34 @@ final class MultimediaLoader {
                     let detailMultimedia = try self.decoder.decode(DetailMultimediaModel.self, from: data)
                     completion(detailMultimedia)
                 } catch {
-                    print(error)
+                    self.delegate?.presentDefaultError()
+
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure:
+                self.delegate?.presentAlert(message: MovveeError.codeError.rawValue, completion: {
+                    self.fetchDetailData(multimedia: multimedia, completion: completion)
+                })
+            }
+        }
+    }
+
+    func fetchCastData(multimedia: MultimediaViewModel, completion: @escaping (CastModel) -> Void) {
+        guard let url = URL(string: baseURL + "\(multimedia.type.rawValue)/\(multimedia.id)/credits?api_key=\(apiKey)") else { return }
+        print(url)
+
+        networkManager.fetchData(with: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let detailMultimedia = try self.decoder.decode(CastModel.self, from: data)
+                    completion(detailMultimedia)
+                } catch {
+                    self.delegate?.presentDefaultError()
+                }
+            case .failure:
+                self.delegate?.presentAlert(message: MovveeError.codeError.rawValue, completion: {
+                    self.fetchCastData(multimedia: multimedia, completion: completion)
+                })
             }
         }
     }
@@ -169,8 +237,6 @@ final class MultimediaLoader {
 
             time = "\(timeTuple.hours) h \(timeTuple.leftMinutes) min"
 
-
-         //   time = detailMultimedia.episodeRunTime?.first
         }
 
         id = detailMultimedia.id
@@ -199,51 +265,6 @@ final class MultimediaLoader {
         return (minutes / 60, (minutes % 60))
     }
 
-    func getMediaData(for type: MultimediaTypeURL, completion: @escaping (([MultimediaViewModel]) -> Void)) {
-        var multimediaViewModel = [MultimediaViewModel]()
-
-        fetchMultimedia(for: type) { movie in
-            guard let result = movie.results else { return }
-            result.forEach { movieResult in
-
-                let posterURL = self.imageBaseUrl + (movieResult.posterPath ?? "") 
-                let formattedDate: String
-                let genre: String
-                let title: String
-
-                switch type {
-                case .movie:
-                    formattedDate = movieResult.releaseDate?.convertDateString() ?? "Unknown date"
-                    genre = self.movieGenres[movieResult.genreIds.first ?? 00] ?? "Unknown genre"
-                    title = movieResult.title ?? "Unknown movie"
-
-
-                case .tvShow:
-                    formattedDate = movieResult.firstAirDate?.convertDateString() ?? "Unknown date"
-                    genre = self.tvShowGenres[movieResult.genreIds.first ?? 00] ?? "Unknown genre"
-                    title = movieResult.name ?? "Unknown name"
-                }
-
-                multimediaViewModel.append(MultimediaViewModel(id: movieResult.id,
-                                                               type: type,
-                                                               posterImageLink: posterURL,
-                                                               titleName: title,
-                                                               releaseDate: formattedDate,
-                                                               genre: genre,
-                                                               description: movieResult.overview,
-                                                               rating: movieResult.voteAverage))
-
-
-            }
-            completion(multimediaViewModel)
-
-        }
-    }
-
-//    func getMediaDataToShow(completion: @escaping (DetailMultimediaViewModel) -> Void) {
-//
-//        fetchDetailData(multimedia: )
-//    }
 
     func fetchImage(from endpoint: String, completion: @escaping (UIImage?) -> Void) {
        let cacheKey = NSString(string: endpoint)
@@ -259,6 +280,7 @@ final class MultimediaLoader {
             switch result {
             case .success(let data):
                 guard let image = UIImage(data: data) else {
+                    self.delegate?.presentDefaultError(errorText: MovveeError.errorLoadingImage.rawValue)
                     completion(nil)
                     return
                 }
@@ -268,7 +290,7 @@ final class MultimediaLoader {
                 }
             case .failure(let error):
                 completion(nil)
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

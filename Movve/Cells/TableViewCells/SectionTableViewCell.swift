@@ -51,6 +51,5 @@ class SectionsTableViewCell: UITableViewCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInsetAdjustmentBehavior = .never
     }
-
 }
 
