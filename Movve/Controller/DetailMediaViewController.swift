@@ -25,6 +25,7 @@ class DetailMediaViewController: UIViewController {
         label.font = .boldSystemFont(ofSize: 36)
         label.textColor = .white
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
@@ -34,11 +35,21 @@ class DetailMediaViewController: UIViewController {
         label.text = "Test Cinema Name"
         label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .systemGray
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
     }()
 
-    var starsStackView: UIStackView = {
+    lazy var ratingLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 1, green: 0.7547127604, blue: 0.0322817266, alpha: 1)
+        label.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        return label
+    }()
+
+    lazy var starsStackView: UIStackView = {
         var arrangedSubviews = [UIView]()
         (0..<5).forEach { _ in
             let imageView = UIImageView(image: #imageLiteral(resourceName: "star"))
@@ -48,11 +59,22 @@ class DetailMediaViewController: UIViewController {
         }
         arrangedSubviews.append(UIView())
 
-
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 4
         return stackView
     }()
+
+    func updateStars(rating: Double) {
+        let numberOfStars = Int(rating / 2)
+        ratingLabel.text = String(format: "%.1f", rating)
+        for (index, arrangedSubview) in starsStackView.arrangedSubviews.enumerated() {
+            if let imageView = arrangedSubview as? UIImageView {
+                imageView.image = index < numberOfStars ? UIImage(named: "starUnfill")?.withTintColor(#colorLiteral(red: 1, green: 0.7547127604, blue: 0.0322817266, alpha: 1)) : UIImage(named: "starUnfill")?.withTintColor(.systemGray)
+            }
+        }
+    }
+
 
     let overviewTextView: UITextView = {
         let tv = UITextView()
@@ -116,10 +138,16 @@ class DetailMediaViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.titleLabel.text = detailViewModel.title
-            self.infoLabel.text = detailViewModel.releaseYear + detailViewModel.genres + String(detailViewModel.runtime ?? 0)
+            self.infoLabel.text = "\(detailViewModel.releaseYear) • \(detailViewModel.genres) • \(String(detailViewModel.runtime ?? ""))"
             self.overviewTextView.text = detailViewModel.overview
+            print(detailViewModel.voteAverage)
+
+            self.updateStars(rating: detailViewModel.voteAverage)
         }
 
+        multimediaLoader.fetchImage(from: detailViewModel.posterPath) { [weak self] image in
+            self?.posterImageView.image = image
+        }
     }
 
     let gradient = CAGradientLayer()
@@ -138,6 +166,7 @@ class DetailMediaViewController: UIViewController {
     }
 
     private func setupLayout() {
+
         let fadingView = UIView(frame: CGRect(x: 0, y: 322, width: view.frame.width, height: 50))
         fadingView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -148,9 +177,12 @@ class DetailMediaViewController: UIViewController {
 
         addFadingLayer(in: fadingView)
 
+
         view.addSubview(titleLabel)
         view.addSubview(infoLabel)
+
         view.addSubview(starsStackView)
+        view.addSubview(ratingLabel)
         view.addSubview(overviewTextView)
 
 
@@ -180,9 +212,13 @@ class DetailMediaViewController: UIViewController {
             infoLabel.heightAnchor.constraint(equalToConstant: 20),
 
             starsStackView.topAnchor.constraint(equalTo: infoLabel.topAnchor, constant: 25),
-            starsStackView.heightAnchor.constraint(equalToConstant: 24),
+         //   starsStackView.heightAnchor.constraint(equalToConstant: 24),
             starsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             starsStackView.widthAnchor.constraint(equalToConstant: 140),
+
+            ratingLabel.trailingAnchor.constraint(equalTo: starsStackView.leadingAnchor, constant: -12),
+            ratingLabel.bottomAnchor.constraint(equalTo: starsStackView.bottomAnchor),
+
 
             overviewTextView.topAnchor.constraint(equalTo: starsStackView.bottomAnchor, constant: 10),
             overviewTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
@@ -200,57 +236,5 @@ extension DetailMediaViewController: UIScrollViewDelegate {
                scrollView.contentOffset.y = 0
            }
     }
-
 }
 
-/*
-func setupLayout() {
-
-    let backgroundView = UIView(frame: CGRect(x: 0, y: 322, width: view.frame.width, height: 50))
-
-    backgroundView.translatesAutoresizingMaskIntoConstraints = false
-
-    let scrollView = UIScrollView(frame: view.frame)
-
-    scrollView.addSubview(posterImageView)
-    scrollView.translatesAutoresizingMaskIntoConstraints = false
-    scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-
-    view.addSubview(scrollView)
-    scrollView.addSubview(posterImageView)
-
-    let gradient = CAGradientLayer()
-    gradient.frame = CGRect(x: 0, y: 322, width: view.frame.width, height: 50)
-    let startColor = UIColor.clear.cgColor
-    let endColor = UIColor.mainColor.cgColor
-    gradient.colors = [startColor, endColor]
-    gradient.locations = [0, 1]
-
-
-    view.addSubview(backgroundView)
-
-
-    posterImageView.layer.addSublayer(gradient)
-
-
-
-
-    NSLayoutConstraint.activate([
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-
-        posterImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-        posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        posterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        posterImageView.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-
-//            backgroundView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: -50),
-//            backgroundView.heightAnchor.constraint(equalToConstant: 100),
-//            backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-    ])
-}
-
-}
-*/

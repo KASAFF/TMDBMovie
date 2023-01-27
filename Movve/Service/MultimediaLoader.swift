@@ -149,24 +149,36 @@ final class MultimediaLoader {
         let title: String
         let id: Int
         let releaseYear: String
-        let genres: String
+        var genres: String
         let posterPath: String
         let voteAverage: Double
-        let time: Int?
+        let time: String?
         let overview: String
 
         switch type {
         case .movie:
             title = detailMultimedia.title ?? "No name"
-            time = detailMultimedia.runtime
+            let timeTuple = minutesToHoursAndMinutes(detailMultimedia.runtime ?? 0)
+
+             time = "\(timeTuple.hours) h \(timeTuple.leftMinutes) min"
+
         case .tvShow:
             title = detailMultimedia.name ?? "No name"
-            time = detailMultimedia.episodeRunTime?.first
+
+           let timeTuple = minutesToHoursAndMinutes(detailMultimedia.episodeRunTime?.first ?? 0)
+
+            time = "\(timeTuple.hours) h \(timeTuple.leftMinutes) min"
+
+
+         //   time = detailMultimedia.episodeRunTime?.first
         }
 
         id = detailMultimedia.id
         releaseYear = detailMultimedia.releaseDate?.convertToYear() ?? ""
         genres = detailMultimedia.genres.first?.name ?? ""
+        if detailMultimedia.genres.count >= 2 {
+            genres += ", " + detailMultimedia.genres[1].name
+        }
         posterPath = detailMultimedia.posterPath
         voteAverage = detailMultimedia.voteAverage
         overview = detailMultimedia.overview
@@ -181,6 +193,10 @@ final class MultimediaLoader {
                                          posterPath: posterPath,
                                          voteAverage: voteAverage,
                                          runtime: time)
+    }
+
+    func minutesToHoursAndMinutes(_ minutes: Int) -> (hours: Int , leftMinutes: Int) {
+        return (minutes / 60, (minutes % 60))
     }
 
     func getMediaData(for type: MultimediaTypeURL, completion: @escaping (([MultimediaViewModel]) -> Void)) {
@@ -232,7 +248,9 @@ final class MultimediaLoader {
     func fetchImage(from endpoint: String, completion: @escaping (UIImage?) -> Void) {
        let cacheKey = NSString(string: endpoint)
         if let image = MultimediaLoader.cache.object(forKey: cacheKey) {
-            completion(image)
+            DispatchQueue.main.async {
+                completion(image)
+            }
             return
         }
 
@@ -245,7 +263,9 @@ final class MultimediaLoader {
                     return
                 }
                 MultimediaLoader.cache.setObject(image, forKey: cacheKey)
-                completion(image)
+                DispatchQueue.main.async {
+                    completion(image)
+                }
             case .failure(let error):
                 completion(nil)
                 print(error)

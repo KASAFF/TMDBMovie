@@ -15,7 +15,7 @@ struct DetailMultimediaViewModel: Codable {
     let title: String
     let posterPath: String
     let voteAverage: Double
-    let runtime: Int?
+    let runtime: String?
 }
 
 // MARK: - Result

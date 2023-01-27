@@ -20,7 +20,7 @@ final class NetworkManager {
 
             if let response = response as? HTTPURLResponse,
                 response.statusCode < 200 || response.statusCode >= 300 {
-               // completion(.failure(error.unsafelyUnwrapped) )
+                completion(.failure(error.unsafelyUnwrapped) )
                 return
             }
 
@@ -33,16 +33,7 @@ final class NetworkManager {
 
 
 
-//do {
-//    let decoder = JSONDecoder()
-//    decoder.keyDecodingStrategy = .convertFromSnakeCase
-//  let multimedia = try decoder.decode(Multimedia.self, from: data)
-//    print(multimedia.results?.first)
-//} catch {
-//    print(error)
-//}
 
- // guard let url = URL(string: baseURL + contentType.rawValue + "?api_key=" + apiKey) else { return }
 
 
 // https://api.themoviedb.org/3/discover/movie?api_key=594bcc6cf3865f6c3e8326fd2d8f3f17 movie link
