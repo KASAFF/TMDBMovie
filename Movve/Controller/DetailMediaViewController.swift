@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailMediaViewController: UIViewController {
+class DetailMediaViewController: DataLoadingVC {
 
     lazy var backButton: UIButton = {
         let button = UIButton()
@@ -164,8 +164,10 @@ class DetailMediaViewController: UIViewController {
         setupLayout()
     }
 
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showLoadingView()
         setTabBarHidden(true)
     }
 
@@ -205,6 +207,7 @@ class DetailMediaViewController: UIViewController {
             self.configureWith(detailViewModel: viewModel)
             self.multimediaLoader.fetchCastData(multimedia: multimedia) { castdata in
                 self.castArray = castdata.cast
+                self.dismissLoadingView()
             }
         }
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: DataLoadingVC {
 
     let headerLabel: UILabel = {
         let navLabel = UILabel()
@@ -58,13 +58,14 @@ class MainViewController: UIViewController {
 
     var tvShowsArray = [MultimediaViewModel]()
 
-    override var preferredStatusBarStyle : UIStatusBarStyle { .lightContent }
-
     func fetchAllTypesOfMedia() {
         multimediaLoader.getAllTypesOfMediaData { allDataArray in
             self.allDataArray = allDataArray
+            self.dismissLoadingView()
         }
     }
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

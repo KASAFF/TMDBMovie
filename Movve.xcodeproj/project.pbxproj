@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB57C40D2985384D008A7497 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C40C2985384D008A7497 /* BookmarksViewController.swift */; };
+		AB57C41329857E53008A7497 /* DataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C41229857E53008A7497 /* DataLoadingVC.swift */; };
 		AB5EAAD7297EDE5100F39D31 /* DetailMultimediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */; };
 		AB5EAAD9297EDFE400F39D31 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */; };
 		AB5EAADC297F56F500F39D31 /* DetailMultimediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		AB57C40C2985384D008A7497 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
+		AB57C41229857E53008A7497 /* DataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingVC.swift; sourceTree = "<group>"; };
 		AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMultimediaModel.swift; sourceTree = "<group>"; };
 		AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
 		AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMultimediaViewModel.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				ABF28CB129847A3A00791987 /* AlertPresenter.swift */,
 				AB66A292297C12C200EBB009 /* MainTabBarController.swift */,
 				AB57C40C2985384D008A7497 /* BookmarksViewController.swift */,
+				AB57C41229857E53008A7497 /* DataLoadingVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				ABF28CAB2984227B00791987 /* CastModel.swift in Sources */,
 				ABF28CB629847CC900791987 /* MovveError.swift in Sources */,
 				AB66A29C297C338C00EBB009 /* SectionTableViewCell.swift in Sources */,
+				AB57C41329857E53008A7497 /* DataLoadingVC.swift in Sources */,
 				AB66A29F297C343A00EBB009 /* MultimediaModel.swift in Sources */,
 				AB66A295297C1D4A00EBB009 /* UIColor+Extension.swift in Sources */,
 			);
