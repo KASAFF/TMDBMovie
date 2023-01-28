@@ -39,6 +39,7 @@ class SectionsTableViewCell: UITableViewCell {
 
     func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UIHelper.createFlowLayout(in: contentView))
+        print(contentView.frame)
         contentView.addSubview(collectionView)
         collectionView.register(PopularCell.self, forCellWithReuseIdentifier: PopularCell.reuseID)
 

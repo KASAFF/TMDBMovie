@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Multimedia
-struct Multimedia: Codable {
+struct MultimediaModel: Codable {
     let page: Int
     let results: [Movie]?
     enum CodingKeys: String, CodingKey {

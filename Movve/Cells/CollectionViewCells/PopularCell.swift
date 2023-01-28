@@ -27,6 +27,7 @@ class PopularCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Movie name"
         label.font = .boldSystemFont(ofSize: 14)
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -36,6 +37,7 @@ class PopularCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Dec 16, 1984"
         label.font = .systemFont(ofSize: 12)
+        label.heightAnchor.constraint(equalToConstant: 14).isActive = true
         label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -51,7 +53,6 @@ class PopularCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     private func configreLayout() {
         let stackView = UIStackView(arrangedSubviews: [
             popularImageView,
@@ -61,19 +62,19 @@ class PopularCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 4
-        stackView.distribution = .equalCentering
+        stackView.distribution = .fill
         stackView.alignment = .leading
-        contentView.addSubview(stackView)
+        addSubview(stackView)
 
         let padding: CGFloat = 0
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: padding),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: padding),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: padding),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding),
 
-            popularImageView.heightAnchor.constraint(equalToConstant: 190),
+            popularImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 190),
             popularImageView.widthAnchor.constraint(equalToConstant: 140)
         ])
     }

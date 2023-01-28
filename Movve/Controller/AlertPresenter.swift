@@ -29,16 +29,9 @@ protocol AlertPresenterProtocol {
         showAlert(alert)
     }
 
-//     func showError(error: MovveeError) {
-//         let model = AlertModel(title: "An Error Occured", message: error.rawValue, buttonText: "Try Again") {
-//             model.
-//         }
-//     }
-
      init(delegate: UIViewController?) {
          self.delegate = delegate
      }
-
 
    private func showAlert(_ alert: UIAlertController) {
         delegate?.present(alert, animated: true)

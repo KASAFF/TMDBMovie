@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB57C40D2985384D008A7497 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C40C2985384D008A7497 /* BookmarksViewController.swift */; };
 		AB5EAAD7297EDE5100F39D31 /* DetailMultimediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */; };
 		AB5EAAD9297EDFE400F39D31 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */; };
 		AB5EAADC297F56F500F39D31 /* DetailMultimediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */; };
@@ -19,7 +20,7 @@
 		AB66A295297C1D4A00EBB009 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A294297C1D4A00EBB009 /* UIColor+Extension.swift */; };
 		AB66A298297C281F00EBB009 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A297297C281F00EBB009 /* PopularCell.swift */; };
 		AB66A29C297C338C00EBB009 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A29B297C338C00EBB009 /* SectionTableViewCell.swift */; };
-		AB66A29F297C343A00EBB009 /* Multimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A29E297C343A00EBB009 /* Multimedia.swift */; };
+		AB66A29F297C343A00EBB009 /* MultimediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A29E297C343A00EBB009 /* MultimediaModel.swift */; };
 		AB66A2A1297C5A1A00EBB009 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB66A2A0297C5A1A00EBB009 /* UIHelper.swift */; };
 		ABB8DE8B297C85AD006EA231 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE8A297C85AD006EA231 /* NetworkManager.swift */; };
 		ABB8DE8E297C94DE006EA231 /* MultimediaLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8DE8D297C94DE006EA231 /* MultimediaLoader.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB57C40C2985384D008A7497 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMultimediaModel.swift; sourceTree = "<group>"; };
 		AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
 		AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMultimediaViewModel.swift; sourceTree = "<group>"; };
@@ -49,7 +51,7 @@
 		AB66A294297C1D4A00EBB009 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		AB66A297297C281F00EBB009 /* PopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		AB66A29B297C338C00EBB009 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
-		AB66A29E297C343A00EBB009 /* Multimedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multimedia.swift; sourceTree = "<group>"; };
+		AB66A29E297C343A00EBB009 /* MultimediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaModel.swift; sourceTree = "<group>"; };
 		AB66A2A0297C5A1A00EBB009 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		ABB8DE8A297C85AD006EA231 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		ABB8DE8D297C94DE006EA231 /* MultimediaLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaLoader.swift; sourceTree = "<group>"; };
@@ -91,6 +93,8 @@
 				AB5EAAD8297EDFE400F39D31 /* DetailMediaViewController.swift */,
 				AB66A282297C0ECB00EBB009 /* MainViewController.swift */,
 				ABF28CB129847A3A00791987 /* AlertPresenter.swift */,
+				AB66A292297C12C200EBB009 /* MainTabBarController.swift */,
+				AB57C40C2985384D008A7497 /* BookmarksViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -116,12 +120,11 @@
 			children = (
 				AB66A29D297C342A00EBB009 /* Models */,
 				AB66A296297C27F100EBB009 /* Cells */,
-				AB66A27E297C0ECB00EBB009 /* AppDelegate.swift */,
 				ABB8DE8C297C85C6006EA231 /* Service */,
 				AB077452297FF9AA00C1AF2C /* Extension */,
 				AB66A280297C0ECB00EBB009 /* SceneDelegate.swift */,
 				AB5EAADA297EDFE900F39D31 /* Controller */,
-				AB66A292297C12C200EBB009 /* MainTabBarController.swift */,
+				AB66A27E297C0ECB00EBB009 /* AppDelegate.swift */,
 				AB66A287297C0ECD00EBB009 /* Assets.xcassets */,
 				AB66A289297C0ECD00EBB009 /* LaunchScreen.storyboard */,
 				AB66A28C297C0ECD00EBB009 /* Info.plist */,
@@ -158,7 +161,7 @@
 		AB66A29D297C342A00EBB009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AB66A29E297C343A00EBB009 /* Multimedia.swift */,
+				AB66A29E297C343A00EBB009 /* MultimediaModel.swift */,
 				ABB8DE8F297C9A90006EA231 /* MultimediaViewModel.swift */,
 				AB5EAAD6297EDE5100F39D31 /* DetailMultimediaModel.swift */,
 				AB5EAADB297F56F500F39D31 /* DetailMultimediaViewModel.swift */,
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB57C40D2985384D008A7497 /* BookmarksViewController.swift in Sources */,
 				ABB8DE8E297C94DE006EA231 /* MultimediaLoader.swift in Sources */,
 				AB66A283297C0ECB00EBB009 /* MainViewController.swift in Sources */,
 				ABB99A3C297DDAF6002490E6 /* Dateformatter + Extension.swift in Sources */,
@@ -279,7 +283,7 @@
 				ABF28CAB2984227B00791987 /* CastModel.swift in Sources */,
 				ABF28CB629847CC900791987 /* MovveError.swift in Sources */,
 				AB66A29C297C338C00EBB009 /* SectionTableViewCell.swift in Sources */,
-				AB66A29F297C343A00EBB009 /* Multimedia.swift in Sources */,
+				AB66A29F297C343A00EBB009 /* MultimediaModel.swift in Sources */,
 				AB66A295297C1D4A00EBB009 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

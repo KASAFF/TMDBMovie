@@ -194,8 +194,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.configureData(multimedia: multimedia)
         
 
-        print(collectionView.tag)
-
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

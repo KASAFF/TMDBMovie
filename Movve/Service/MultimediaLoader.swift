@@ -21,6 +21,12 @@ final class MultimediaLoader {
 
    static let shared = MultimediaLoader()
 
+     var bookmarks = [MultimediaViewModel]() {
+        didSet {
+            print(bookmarks)
+        }
+    }
+
     weak var delegate: UIViewController?
 
     private let decoder: JSONDecoder = {
@@ -143,18 +149,17 @@ final class MultimediaLoader {
             completion(arrayOfAllData)
         }
     }
-    private func fetchMultimedia(for type: MultimediaTypeURL, completion: @escaping (Multimedia) -> Void) {
+    private func fetchMultimedia(for type: MultimediaTypeURL, completion: @escaping (MultimediaModel) -> Void) {
 
         guard let url = URL(string: baseURL + "discover/" + type.rawValue + "?api_key=" + apiKey) else {
             return
         }
-        print(url)
 
         networkManager.fetchData(with: url) { result in
             switch result {
             case .success(let data):
                 do {
-                    let multimedia = try self.decoder.decode(Multimedia.self, from: data)
+                    let multimedia = try self.decoder.decode(MultimediaModel.self, from: data)
                     completion(multimedia)
                 } catch {
                     self.delegate?.presentDefaultError()
@@ -171,7 +176,6 @@ final class MultimediaLoader {
 //MARK: - DetailMedia Controller Functions
     func fetchDetailData(multimedia: MultimediaViewModel, completion: @escaping (DetailMultimediaModel) -> Void) {
         guard let url = URL(string: baseURL + "\(multimedia.type.rawValue)/\(multimedia.id)?api_key=\(apiKey)") else { return }
-        print(url)
 
         networkManager.fetchData(with: url) { result in
             switch result {
@@ -193,7 +197,6 @@ final class MultimediaLoader {
 
     func fetchCastData(multimedia: MultimediaViewModel, completion: @escaping (CastModel) -> Void) {
         guard let url = URL(string: baseURL + "\(multimedia.type.rawValue)/\(multimedia.id)/credits?api_key=\(apiKey)") else { return }
-        print(url)
 
         networkManager.fetchData(with: url) { result in
             switch result {

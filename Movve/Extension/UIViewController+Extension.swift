@@ -32,6 +32,8 @@ extension UIViewController {
         let alertVC = UIAlertController(title: "Something went wrong",
                                         message: errorText,
                                         preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default)
+        alertVC.addAction(action)
         DispatchQueue.main.async {
             self.present(alertVC, animated: true)
         }

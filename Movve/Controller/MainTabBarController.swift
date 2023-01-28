@@ -39,7 +39,7 @@ class MainTabBarController: UITabBarController {
         viewControllers = [
             generateVC(viewController: UINavigationController(rootViewController: MainViewController()), title: "Home", image: UIImage(systemName: "house.fill")),
             generateVC(viewController: UIViewController(), title: "Play", image: UIImage(systemName: "play.circle")),
-            generateVC(viewController: UIViewController(), title: "Bookmarks", image: UIImage(systemName: "bookmark")),
+            generateVC(viewController: UINavigationController(rootViewController: BookmarksViewController()), title: "Bookmarks", image: UIImage(systemName: "bookmark")),
             generateVC(viewController: UIViewController(), title: "Profile", image: UIImage(systemName: "person"))
         ]
     }

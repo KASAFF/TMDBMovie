@@ -21,7 +21,7 @@ class DetailMediaViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        button.addTarget(self, action: #selector(backToMainVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addToBookmarks), for: .touchUpInside)
         return button
     }()
 
@@ -81,9 +81,6 @@ class DetailMediaViewController: UIViewController {
         return stackView
     }()
 
-
-
-
     let overviewTextView: UILabel = {
         let tv = UILabel()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +121,6 @@ class DetailMediaViewController: UIViewController {
         didSet {
             if !castArray.isEmpty {
                 DispatchQueue.main.async {
-                    print(self.castArray)
                     self.collectionView.reloadData()
                     self.castLabel.isHidden = false
                 }
@@ -160,7 +156,6 @@ class DetailMediaViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem?.tintColor = .mainColor
 
-
         scrollView.delegate = self
         view.backgroundColor = .mainColor
         configureCollectionView()
@@ -171,13 +166,22 @@ class DetailMediaViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.backItem?.title = ""
         setTabBarHidden(true)
     }
 
     @objc func backToMainVC() {
         navigationController?.popViewController(animated: true)
+    }
+
+    @objc func addToBookmarks() {
+        if !MultimediaLoader.shared.bookmarks.contains(where: { $0 == multimedia }) {
+            MultimediaLoader.shared.bookmarks.append(multimedia)
+            presentAlert(title: "Success",
+                         message: "Successfully added \(multimedia.type) to bookmarks",
+                         buttonTitle: "Ok") {}
+        } else {
+            presentDefaultError(errorText: "Your already have this \(multimedia.type) bookmarked")
+        }
     }
 
     func configureCollectionView() {

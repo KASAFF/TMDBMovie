@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct MultimediaViewModel {
+struct MultimediaViewModel: Hashable {
     let id: Int
     let type: MultimediaTypeURL
     let posterImageLink: String
